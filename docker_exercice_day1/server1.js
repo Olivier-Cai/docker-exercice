@@ -6,7 +6,7 @@ const port = 4567;
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('pong');
+  res.end('pong')
 });
 
 server.listen(port, hostname, () => {
@@ -15,30 +15,32 @@ server.listen(port, hostname, () => {
 
 const axios = require('axios');
 
-axios.post("http://127.0.0.1:5372/")
-  .then(response => {
-    console.log("pong", " ", port);
-  })
-  .catch(error => {
-    console.log(error);
-  });
+const server3 = "http://127.0.0.1:8080/";
 
-axios.get("http://127.0.0.1:5372/")
+axios.post(server3)
   .then(response => {
-    console.log(response.data, " ", port);
+    console.log("post ",response.data, " ", port);
   })
   .catch(error => {
     console.log(error);
-  });
+});
+
+axios.get(server3)
+  .then(response => {
+    console.log("get ",response.data, " ", port);
+    setTimeout(pong,1500);
+  })
+  .catch(error => {
+    console.log(error);
+});
+
 
 function pong (){
-  axios.post("http://127.0.0.1:5372/")
+  axios.post(server3)
   .then(response => {
-    console.log("pong", " ", port);
+    console.log("post ",response.data, " ", port);
   })
   .catch(error => {
     console.log(error);
   });
-}
-
-setTimeout(pong,1500);
+};

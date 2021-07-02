@@ -15,22 +15,23 @@ server.listen(port, hostname, () => {
 
 const axios = require('axios');
 
-axios.get("http://127.0.0.1:4567/")
-    .then(response => {
-        console.log(response.data, " ", port);
-    })
-    .catch(error =>{
-        console.log(error);
-    });
+const server3 = "http://127.0.0.1:8080/";
+
+axios.get(server3)
+  .then(response => {
+    console.log("get ",response.data, " ", port);
+    setTimeout(ping,1500);
+  })
+  .catch(error => {
+    console.log(error);
+});
 
 function ping (){
-    axios.post("http://127.0.0.1:4567/")
+    axios.post(server3)
     .then(response => {
-        console.log("ping", " ", port);
+        console.log("post ",response.data, " ", port);
     })
     .catch(error =>{
         console.log(error);
     });
-}
-
-setTimeout(ping,1500);
+};
